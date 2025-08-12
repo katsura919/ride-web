@@ -2,7 +2,6 @@
 export type VehicleStatus = 'available' | 'full' | 'unavailable';
 
 export const vehicles: Array<{
-  plate: string;
   route: string;
   eta: string;
   seats: number;
@@ -10,7 +9,6 @@ export const vehicles: Array<{
   img: string;
 }> = [
   {
-    plate: "19287ABC",
     route: "Igpit to Cogon",
     eta: "3 mins",
     seats: 3,
@@ -18,23 +16,6 @@ export const vehicles: Array<{
     img: "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=400&q=80",
   },
   {
-    plate: "19287ABC",
-    route: "Igpit to Cogon",
-    eta: "3 mins",
-    seats: 3,
-    status: "available",
-    img: "https://images.unsplash.com/photo-1511918984145-48de785d4c4e?auto=format&fit=crop&w=400&q=80",
-  },
-  {
-    plate: "19287ABC",
-    route: "Igpit to Cogon",
-    eta: "3 mins",
-    seats: 3,
-    status: "available",
-    img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
-  },
-  {
-    plate: "19287ABC",
     route: "Igpit to Cogon",
     eta: "3 mins",
     seats: 3,
@@ -42,15 +23,27 @@ export const vehicles: Array<{
     img: "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=400&q=80",
   },
   {
-    plate: "19287ABC",
+    route: "Igpit to Cogon",
+    eta: "3 mins",
+    seats: 3,
+    status: "available",
+    img: "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=400&q=80",
+  },
+  {
+    route: "Igpit to Cogon",
+    eta: "3 mins",
+    seats: 3,
+    status: "available",
+    img: "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=400&q=80",
+  },
+  {
     route: "Igpit to Cogon",
     eta: "3 mins",
     seats: 0,
     status: "full",
-    img: "https://images.unsplash.com/photo-1511918984145-48de785d4c4e?auto=format&fit=crop&w=400&q=80",
+    img: "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=400&q=80",
   },
   {
-    plate: "19287ABC",
     route: "Igpit to Cogon",
     eta: "3 mins",
     seats: 0,
@@ -58,7 +51,6 @@ export const vehicles: Array<{
     img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
   },
   {
-    plate: "19287ABC",
     route: "Igpit to Cogon",
     eta: "3 mins",
     seats: 3,
@@ -66,7 +58,6 @@ export const vehicles: Array<{
     img: "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=400&q=80",
   },
   {
-    plate: "19287ABC",
     route: "Igpit to Cogon",
     eta: "3 mins",
     seats: 3,

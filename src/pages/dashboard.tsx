@@ -1,67 +1,182 @@
 
+
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { DashboardHeader } from "@/components/dashboard-header";
 
 import { vehicles } from "../data/vehicle-data";
-import type { VehicleStatus } from "../data/vehicle-data";
-
-const statusMap: Record<VehicleStatus, { color: string; label: string }> = {
-  available: { color: "bg-green-500", label: "Available" },
-  full: { color: "bg-red-500", label: "Full" },
-  unavailable: { color: "bg-gray-400", label: "Unavailable" },
-};
+import { DashboardCountCard } from "@/components/dashboard-count-card";
+import { Car, CheckCircle, XCircle, AlertCircle, Search, Grid3X3, List, ChevronDown } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+import { DashboardVehicleCard } from "@/components/dashboard-vehicle-card";
+import { VehicleListView } from "@/components/vehicle-list-view";
+import { useState } from "react";
 
 export default function DashboardPage() {
+  const [searchValue, setSearchValue] = useState("");
+  const [selectedVehicleType, setSelectedVehicleType] = useState("Any");
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+
+  // Count vehicles by status
+  const total = vehicles.length;
+  const available = vehicles.filter(v => v.status === 'available').length;
+  const full = vehicles.filter(v => v.status === 'full').length;
+  const unavailable = vehicles.filter(v => v.status === 'unavailable').length;
+
+  // Filter vehicles by type
+  const filteredVehicles = vehicles.filter((v) => {
+    if (selectedVehicleType === "Any") return true;
+    if (selectedVehicleType.toLowerCase() === "available") return v.status === "available";
+    if (selectedVehicleType.toLowerCase() === "full") return v.status === "full";
+    if (selectedVehicleType.toLowerCase() === "unavailable") return v.status === "unavailable";
+    return true;
+  });
+
   return (
-  <div className="flex flex-col h-full w-full flex-1 gap-6 bg-background text-card-foreground mt-1 p-4  border border-border rounded-tl-2xl">
-      {/* Dashboard header */}
-      <DashboardHeader />
-      {/* Status legend and Add Vehicle */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-2">
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-green-500 inline-block" />
-            <span className="text-sm text-muted-foreground">Available</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-red-500 inline-block" />
-            <span className="text-sm text-muted-foreground">Full</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-gray-400 inline-block" />
-            <span className="text-sm text-muted-foreground">Unavailable</span>
-          </div>
+    <ScrollArea className="h-screen  w-full">
+      <div className="flex flex-col min-h-screen w-full flex-1 gap-6 bg-background text-card-foreground p-7 px-15 border border-border">
+        {/* Dashboard header */}
+        <DashboardHeader />
+
+        {/* Vehicles Section */}
+        {/* Header with title and count */}
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-semibold text-foreground flex items-center gap-2">
+            All vehicles
+            <span className="text-sm font-normal text-muted-foreground bg-muted px-2 py-1 rounded-md">
+              {filteredVehicles.length}
+            </span>
+          </h2>
         </div>
-        <div className="flex items-center gap-4">
-          <button className="flex items-center gap-2 px-6 py-2 rounded-lg bg-secondary text-primary font-semibold shadow hover:bg-secondary-foreground hover:text-secondary transition">
-            <span className="text-2xl leading-none">+</span> Add Vehicle
-          </button>
-          <button className="p-2 rounded-full hover:bg-muted transition">
-            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground"><path d="M3 6h18M3 12h18M3 18h18" /><circle cx="19" cy="6" r="2" /><circle cx="19" cy="12" r="2" /><circle cx="19" cy="18" r="2" /></svg>
-          </button>
-        </div>
-      </div>
-      {/* Vehicle cards grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 overflow-y-auto">
-        {vehicles.map((v, i) => (
-          <div key={i} className="relative bg-card rounded-2xl shadow p-4 flex flex-col gap-2 border border-border hover:shadow-lg transition">
-            {/* Status dot */}
-            <span className={`absolute top-3 right-3 w-3 h-3 rounded-full border-2 border-card ${statusMap[v.status].color}`} />
-            {/* Vehicle image */}
-            <img src={v.img} alt="vehicle" className="w-full h-36 object-cover rounded-xl border border-border" />
-            {/* Info */}
-            <div className="flex flex-col gap-1 mt-2">
-              <div className="font-semibold text-foreground">Plate number: <span className="font-bold">{v.plate}</span></div>
-              <div className="text-muted-foreground">Route: <span className="font-bold text-foreground">{v.route}</span></div>
-              <div className="text-muted-foreground">ETA: <span className="font-bold text-foreground">{v.eta}</span></div>
-              <div className="text-muted-foreground">Available Seats: <span className="font-bold text-foreground">{v.seats}</span></div>
+
+        {/* Filter Section */}
+        <div className="flex items-center justify-between gap-4  rounded-lg">
+          {/* Left side - Search and Vehicle Type */}
+          <div className="flex items-center gap-4 flex-1">
+            {/* Search Vehicle */}
+            <div className="relative flex-1 max-w-sm">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+              <input
+                type="text"
+                placeholder="Search vehicle"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 border border-border rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
             </div>
-            {/* Book button */}
-            <button className="absolute bottom-4 right-4 bg-primary text-primary-foreground rounded-full p-2 shadow hover:bg-primary-foreground hover:text-primary transition">
-              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline"><path d="M12 19l9 2-9-18-9 18 9-2z" /></svg>
+
+            {/* Vehicle Type Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="flex items-center gap-2 px-4 py-2 border border-border rounded-lg bg-background text-foreground hover:bg-muted transition-colors">
+                  <span className="text-sm text-muted-foreground">Type</span>
+                  <span className="text-sm font-medium">{selectedVehicleType}</span>
+                  <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                <DropdownMenuItem onClick={() => setSelectedVehicleType("Any")}>Any</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setSelectedVehicleType("Available")}>Available</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setSelectedVehicleType("Full")}>Full</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setSelectedVehicleType("Unavailable")}>Unavailable</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
+          {/* Right side - View Toggle */}
+          <div className="flex items-center gap-1 bg-background p-1 rounded-lg border border-border">
+            <button
+              onClick={() => setViewMode("grid")}
+              className={`p-2 rounded-md transition-colors ${
+                viewMode === "grid" 
+                  ? "bg-primary text-primary-foreground shadow-sm" 
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <Grid3X3 className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => setViewMode("list")}
+              className={`p-2 rounded-md transition-colors ${
+                viewMode === "list" 
+                  ? "bg-primary text-primary-foreground shadow-sm" 
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <List className="w-4 h-4" />
             </button>
           </div>
-        ))}
+        </div>
+
+        {/* Vehicle Display */}
+        {viewMode === "grid" ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-7">
+            {filteredVehicles.map((v, i) => (
+              <DashboardVehicleCard
+                key={i}
+                img={v.img}
+                title={v.route}
+                subtitle={`ETA: ${v.eta}`}
+                status={getVehicleStatusFromData(v.status)}
+                statusColor={getStatusColorFromData(v.status)}
+                orderCompleted={v.seats}
+                lastCheckIn={v.eta}
+                lastCheckInAgo={v.status === 'available' ? 'Available' : v.status === 'full' ? 'Full' : 'Unavailable'}
+                maxLoad={v.seats > 0 ? `${v.seats} seats` : 'No seats'}
+                driver={"-"}
+                onViewDetails={() => {}}
+              />
+            ))}
+          </div>
+        ) : (
+          <VehicleListView
+            vehicles={filteredVehicles.map((v, i) => ({
+              img: v.img,
+              title: v.route,
+              subtitle: `ETA: ${v.eta}`,
+              status: getVehicleStatusFromData(v.status),
+              statusColor: getStatusColorFromData(v.status),
+              orderCompleted: v.seats,
+              lastCheckIn: v.eta,
+              lastCheckInAgo: v.status === 'available' ? 'Available' : v.status === 'full' ? 'Full' : 'Unavailable',
+              maxLoad: v.seats > 0 ? `${v.seats} seats` : 'No seats',
+              driver: "-",
+              onViewDetails: () => {},
+            }))}
+          />
+        )}
       </div>
-    </div>
+    </ScrollArea>
   );
+}
+
+// Helper functions for vehicle data
+function getVehicleStatusFromData(status: string): string {
+  switch (status) {
+    case 'available':
+      return 'Available';
+    case 'full':
+      return 'Full';
+    case 'unavailable':
+      return 'Unavailable';
+    default:
+      return status;
+  }
+}
+
+function getStatusColorFromData(status: string): string {
+  switch (status) {
+    case 'available':
+      return "text-green-600 bg-green-50 border border-green-200";
+    case 'full':
+      return "text-orange-600 bg-orange-50 border border-orange-200";
+    case 'unavailable':
+      return "text-blue-600 bg-blue-50 border border-blue-200";
+    default:
+      return "text-gray-600 bg-gray-50 border border-gray-200";
+  }
 }
