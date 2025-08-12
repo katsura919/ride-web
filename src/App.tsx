@@ -5,7 +5,7 @@ import { ThemeProvider } from "./components/theme-provider";
 import Landing from "./pages/landing";
 import Login from "./pages/login";
 import Register from "./pages/register";
-import DashboardLayout from "./layouts/sidebar-layout";
+import NewDashboardLayout from "./layouts/sidebar-layout-new";
 import Dashboard from "./pages/dashboard";
 import AddVehicle from "./pages/add-vehicle";
 import VehicleManagement from "./pages/vehicle-management";
@@ -20,7 +20,7 @@ function App() {
                 <Route path="/" element={<Landing />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/dashboard" element={<DashboardLayout />}>
+                <Route path="/dashboard" element={<NewDashboardLayout />}>
                     <Route index element={<Dashboard />} />
                     <Route path="add-vehicle" element={<AddVehicle />} />
                     <Route path="vehicle-management" element={<VehicleManagement />} />

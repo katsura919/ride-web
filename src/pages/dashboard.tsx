@@ -47,7 +47,7 @@ export default function DashboardPage() {
 
   return (
     <ScrollArea className="h-screen  w-full">
-      <div className="flex flex-col min-h-screen w-full flex-1 gap-6 bg-background text-card-foreground p-7 px-15 border border-border">
+      <div className="flex flex-col min-h-screen w-full flex-1 gap-6 bg-background text-card-foreground p-7 px-15 ">
         {/* Dashboard header */}
         <DashboardHeader />
 
