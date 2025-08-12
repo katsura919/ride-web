@@ -72,7 +72,7 @@ export const DashboardVehicleCard: React.FC<DashboardVehicleCardProps> = ({
 
           {/* View Details Button */}
           <button
-            className="bg-primary w-full mt-4 border border-border text-background rounded-lg py-2.5 font-medium text-sm hover:bg-muted transition-colors"
+            className="bg-primary w-full mt-4 border border-border text-background rounded-lg py-2.5 font-medium text-sm transition-colors cursor-pointer hover:bg-muted-foreground"
             onClick={onViewDetails}
           >
             View details
