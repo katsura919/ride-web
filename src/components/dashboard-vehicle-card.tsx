@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Clock } from "lucide-react";
 
 export interface DashboardVehicleCardProps {
   img: string;
@@ -25,15 +24,11 @@ export const DashboardVehicleCard: React.FC<DashboardVehicleCardProps> = ({
   status,
   statusColor,
   orderCompleted,
-  lastCheckIn,
-  lastCheckInAgo,
   maxLoad,
-  driver,
   onViewDetails,
-  className,
 }) => {
   return (
-    <Card className={cn("rounded-xl shadow-sm border border-border overflow-hidden hover:shadow-md transition-shadow", className)}>
+    <Card>
       <CardContent className="p-0">
         {/* Vehicle Image */}
         <div className="relative p-4">
@@ -61,35 +56,23 @@ export const DashboardVehicleCard: React.FC<DashboardVehicleCardProps> = ({
           <div className="border-t border-border" />
 
           {/* Details Grid */}
-          <div className="space-y-2.5">
+          <div className="">
             <div className="flex justify-between items-center text-sm">
               <span className="text-muted-foreground">Order completed</span>
               <span className="font-medium text-foreground">{orderCompleted}</span>
             </div>
             
-            <div className="flex justify-between items-center text-sm">
-              <span className="text-muted-foreground">Last check-in/out</span>
-              <div className="flex items-center gap-1.5 text-foreground font-medium">
-                <Clock className="w-3.5 h-3.5" />
-                <span>{lastCheckIn}</span>
-                <span className="text-muted-foreground font-normal">({lastCheckInAgo})</span>
-              </div>
-            </div>
             
             <div className="flex justify-between items-center text-sm">
               <span className="text-muted-foreground">Max. load capacity</span>
               <span className="font-medium text-foreground">{maxLoad}</span>
             </div>
-            
-            <div className="flex justify-between items-center text-sm">
-              <span className="text-muted-foreground">Assigned driver</span>
-              <span className="font-semibold text-foreground">{driver}</span>
-            </div>
+        
           </div>
 
           {/* View Details Button */}
           <button
-            className="w-full mt-4 border border-border text-foreground rounded-lg py-2.5 font-medium text-sm hover:bg-muted transition-colors"
+            className="bg-primary w-full mt-4 border border-border text-background rounded-lg py-2.5 font-medium text-sm hover:bg-muted transition-colors"
             onClick={onViewDetails}
           >
             View details

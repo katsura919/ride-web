@@ -14,12 +14,21 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { DashboardVehicleCard } from "@/components/dashboard-vehicle-card";
 import { VehicleListView } from "@/components/vehicle-list-view";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Card, CardContent } from "@/components/ui/card";
 
 export default function DashboardPage() {
   const [searchValue, setSearchValue] = useState("");
   const [selectedVehicleType, setSelectedVehicleType] = useState("Any");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [loading, setLoading] = useState(true);
+
+  // Simulate loading for demo (replace with real loading logic as needed)
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1200);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Count vehicles by status
   const total = vehicles.length;
@@ -42,7 +51,15 @@ export default function DashboardPage() {
         {/* Dashboard header */}
         <DashboardHeader />
 
-        {/* Vehicles Section */}
+
+        {/* Vehicle Count Cards */}
+        <div className="grid w-full gap-5 mb-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+          <DashboardCountCard label="Total Vehicles" count={total} icon={<Car className="text-primary w-6 h-6" />} subtext={""} />
+          <DashboardCountCard label="Available" count={available} icon={<CheckCircle className="text-green-400 w-6 h-6" />} />
+          <DashboardCountCard label="Full" count={full} icon={<XCircle className="text-orange-400 w-6 h-6" />} />
+          <DashboardCountCard label="Unavailable" count={unavailable} icon={<AlertCircle className="text-blue-400 w-6 h-6" />}/>
+        </div>
+
         {/* Header with title and count */}
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold text-foreground flex items-center gap-2">
@@ -113,8 +130,47 @@ export default function DashboardPage() {
         </div>
 
         {/* Vehicle Display */}
-        {viewMode === "grid" ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-7">
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Card key={i} className="rounded-xl shadow-sm border border-border overflow-hidden hover:shadow-md transition-shadow">
+                <CardContent className="p-0">
+                  <div className="relative p-4">
+                    <Skeleton className="w-full h-40 rounded-lg mb-2" />
+                  </div>
+                  <div className="p-4 space-y-3">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <Skeleton className="h-4 w-2/3 mb-2" />
+                        <Skeleton className="h-3 w-1/3" />
+                      </div>
+                      <Skeleton className="h-5 w-16 ml-2 rounded-full" />
+                    </div>
+                    <div className="border-t border-border my-2" />
+                    <div className="space-y-2.5">
+                      <div className="flex justify-between items-center text-sm">
+                        <Skeleton className="h-3 w-1/3" />
+                        <Skeleton className="h-3 w-8" />
+                      </div>
+                      <div className="flex justify-between items-center text-sm">
+                        <Skeleton className="h-3 w-1/3" />
+                        <div className="flex items-center gap-1.5">
+                          <Skeleton className="h-3 w-16" />
+                          <Skeleton className="h-3 w-10" />
+                        </div>
+                      </div>
+       
+                    </div>
+                    <Skeleton className="w-full h-9 mt-4 rounded-lg" />
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        ) : filteredVehicles.length === 0 ? (
+          <div className="flex items-center justify-center h-40 text-muted-foreground text-lg font-medium">No Vehicles</div>
+        ) : viewMode === "grid" ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {filteredVehicles.map((v, i) => (
               <DashboardVehicleCard
                 key={i}
@@ -134,7 +190,7 @@ export default function DashboardPage() {
           </div>
         ) : (
           <VehicleListView
-            vehicles={filteredVehicles.map((v, i) => ({
+            vehicles={filteredVehicles.map((v) => ({
               img: v.img,
               title: v.route,
               subtitle: `ETA: ${v.eta}`,
