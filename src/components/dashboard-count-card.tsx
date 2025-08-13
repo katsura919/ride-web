@@ -13,7 +13,7 @@ interface DashboardCountCardProps {
 
 export const DashboardCountCard: React.FC<DashboardCountCardProps> = ({ label, count, icon, className }) => {
   return (
-    <Card className={"bg-card rounded-2xl shadow-sm  p-6 flex flex-row items-stretch justify-between " + (className || "") }>
+    <Card className={"bg-card rounded-2xl shadow-sm h-30 p-6 flex flex-row items-stretch justify-between " + (className || "") }>
       <CardContent className="p-0 flex flex-row items-stretch w-full h-full">
         <div className="flex flex-col justify-center flex-1 gap-1">
           <span className="text-sm text-card-foreground mb-1">{label}</span>

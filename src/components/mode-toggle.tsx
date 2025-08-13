@@ -1,5 +1,5 @@
 import { Moon, Sun } from "lucide-react"
-
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button"
 import { useState, useEffect } from "react";
 import { useTheme } from "@/components/theme-provider"
@@ -22,16 +22,18 @@ export function ModeToggle() {
 
   return (
     <Button
-      className="bg-background text-primary border-border border  hover:text-primary-foreground focus-visible:ring-2 focus-visible:ring-ring transition-colors"
-      variant="outline"
+       className={cn(
+                  "relative p-2 rounded-lg transition-colors cursor-pointer"
+                )}
+      variant="ghost"
       size="icon"
       onClick={toggleTheme}
       aria-label="Toggle theme"
     >
       {isDark ? (
-        <Sun className="h-[1.2rem] w-[1.2rem] transition-all text-foreground" />
+        <Sun className="h-5 w-5 transition-all text-foreground" />
       ) : (
-        <Moon className="h-[1.2rem] w-[1.2rem] transition-all text-foreground" />
+        <Moon className="h-5 w-5 transition-all text-foreground" />
       )}
     </Button>
   );

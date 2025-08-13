@@ -1,11 +1,8 @@
-
-
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { DashboardHeader } from "@/components/dashboard-header";
 
 import { vehicles } from "../data/vehicle-data";
 import { DashboardCountCard } from "@/components/dashboard-count-card";
-import { Car, CheckCircle, XCircle, AlertCircle, Search, Grid3X3, List, ChevronDown } from "lucide-react";
+import { Car, CheckCircle, XCircle, AlertCircle, Search, Grid3X3, List, ChevronDown, ListFilter } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -47,10 +44,7 @@ export default function DashboardPage() {
 
   return (
     <ScrollArea className="h-screen  w-full">
-      <div className="flex flex-col min-h-screen w-full flex-1 gap-6 bg-background text-card-foreground p-7 px-15 ">
-        {/* Dashboard header */}
-        <DashboardHeader />
-
+      <div className="flex flex-col min-h-screen w-full flex-1 gap-6 px-7 bg-background text-card-foreground p-5">
 
         {/* Vehicle Count Cards */}
         <div className="grid w-full gap-5 mb-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
@@ -79,7 +73,7 @@ export default function DashboardPage() {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
               <input
                 type="text"
-                placeholder="Search vehicle"
+                placeholder="Search"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-border rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
@@ -89,8 +83,8 @@ export default function DashboardPage() {
             {/* Vehicle Type Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-2 px-4 py-2 border border-border rounded-lg bg-background text-foreground hover:bg-muted transition-colors">
-                  <span className="text-sm text-muted-foreground">Type</span>
+                <button className="flex items-center gap-2 px-4 py-2.5 border border-border rounded-lg bg-background text-foreground hover:bg-muted transition-colors">
+                  <ListFilter className="w-4 h-4 text-muted-foreground" />
                   <span className="text-sm font-medium">{selectedVehicleType}</span>
                   <ChevronDown className="w-4 h-4 text-muted-foreground" />
                 </button>
@@ -135,8 +129,8 @@ export default function DashboardPage() {
             {Array.from({ length: 5 }).map((_, i) => (
               <Card key={i} className="rounded-xl shadow-sm border border-border overflow-hidden hover:shadow-md transition-shadow">
                 <CardContent className="p-0">
-                  <div className="relative p-4">
-                    <Skeleton className="w-full h-40 rounded-lg mb-2" />
+                  <div className="relative px-4">
+                    <Skeleton className="w-full h-42 rounded-lg mb-2" />
                   </div>
                   <div className="p-4 space-y-3">
                     <div className="flex items-start justify-between">
@@ -161,7 +155,7 @@ export default function DashboardPage() {
                       </div>
        
                     </div>
-                    <Skeleton className="w-full h-9 mt-4 rounded-lg" />
+                    <Skeleton className="w-full h-9 mt-4 py-3 rounded-lg" />
                   </div>
                 </CardContent>
               </Card>

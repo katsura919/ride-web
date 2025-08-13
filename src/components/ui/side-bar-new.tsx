@@ -2,6 +2,7 @@ import React, { useState, createContext, useContext } from "react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, ChevronRight, ChevronLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface SidebarLink {
   label: string;
@@ -86,8 +87,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ children, className }) => {
           ease: [0.4, 0, 0.2, 1],
         }}
         className={cn(
-          "hidden md:flex h-full bg-white border-r border-gray-200 flex-col relative z-10",
-          "shadow-sm overflow-hidden",
+          "hidden md:flex h-full bg-sidebar flex-col relative z-10",
+          "overflow-hidden",
           className
         )}
         layout
@@ -272,31 +273,20 @@ export const SidebarNavItem: React.FC<SidebarNavItemProps> = ({
   };
 
   return (
-    <a
-      href={link.href}
+    <Link
+      to={link.href}
       onClick={handleClick}
       className={cn(
-        "flex items-center px-3 py-2.5 rounded-lg text-sm font-medium relative",
+        "flex items-center px-3 py-2.5 rounded-lg text-sm font-medium relative ",
         "transition-all duration-200 group",
-        "hover:bg-gray-100 focus:outline-none",
+        "hover:bg-sidebar-accent focus:outline-none",
         link.isActive
-          ? "bg-blue-50 text-blue-700"
-          : "text-gray-700 hover:text-gray-900",
+          ? "bg-sidebar-accent"
+          : "bg-sidebar",
         className
       )}
     >
-      {/* Active indicator - left border */}
-      {link.isActive && (
-        <motion.div
-          className="absolute left-0 top-1 bottom-1 w-1 bg-blue-600 rounded-r-full"
-          initial={{ scaleY: 0 }}
-          animate={{ scaleY: 1 }}
-          transition={{
-            duration: 0.2,
-            ease: [0.4, 0, 0.2, 1],
-          }}
-        />
-      )}
+
 
 
 
@@ -339,7 +329,7 @@ export const SidebarNavItem: React.FC<SidebarNavItemProps> = ({
           {link.label}
         </div>
       )}
-    </a>
+    </Link>
   );
 };
 
