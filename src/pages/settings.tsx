@@ -1,22 +1,14 @@
+import {ScrollArea} from "@/components/ui/scroll-area";
+
 export default function Settings() {
   return (
-    <div className="flex h-full w-full flex-1 flex-col gap-2 rounded-tl-2xl border border-neutral-700 bg-neutral-900 p-2 md:p-10">
-      <div className="flex gap-2">
-        {[...new Array(4)].map((_, idx) => (
-          <div
-            key={"first-array-demo-1" + idx}
-            className="h-20 w-full animate-pulse rounded-lg bg-neutral-800"
-          ></div>
-        ))}
+     <ScrollArea className="h-screen w-full">
+      <div className="flex flex-col min-h-screen w-full flex-1 gap-6 px-7 bg-background text-card-foreground p-5 mb-10">
+        <h1 className="text-2xl font-bold">Settings</h1>
+        <p className="text-sm text-muted-foreground">
+          Fill in the details below to add a new vehicle.
+        </p>
       </div>
-      <div className="flex flex-1 gap-2">
-        {[...new Array(2)].map((_, idx) => (
-          <div
-            key={"second-array-demo-1" + idx}
-            className="h-full w-full animate-pulse rounded-lg bg-neutral-800"
-          ></div>
-        ))}
-      </div>
-    </div>
+    </ScrollArea>
   );
 }

@@ -5,7 +5,7 @@ import { Menu,
          Bell,
          ChevronsUpDown 
 } from "lucide-react";
-import { useSidebarContext } from "./side-bar-new";
+import { useSidebarContext } from "./side-bar";
 import { ModeToggle } from "../mode-toggle";
 import {
   DropdownMenu,
@@ -94,7 +94,7 @@ const UserProfileDropdown: React.FC = () => {
             alt="Profile"
             className="w-9 h-9 rounded-full object-cover"
           />
-          <ChevronsUpDown className="ml-2 w-5 h-5 text-primary" />
+          <ChevronsUpDown className="ml-1 w-5 h-5 text-primary" />
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">

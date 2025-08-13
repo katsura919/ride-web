@@ -9,7 +9,7 @@ import {
   SidebarNavItem,
   SidebarGroup,
   useSidebarContext,
-} from "../components/ui/side-bar-new";
+} from "../components/ui/side-bar";
 import { TopBar } from "../components/ui/top-bar";
 import { motion, AnimatePresence } from "motion/react";
 import { 
