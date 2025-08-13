@@ -153,9 +153,7 @@ export default function DashboardPage() {
                           <Skeleton className="h-3 w-10" />
                         </div>
                       </div>
-       
                     </div>
-                    <Skeleton className="w-full h-9 mt-4 py-3 rounded-lg" />
                   </div>
                 </CardContent>
               </Card>
