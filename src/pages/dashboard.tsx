@@ -49,9 +49,9 @@ export default function DashboardPage() {
         {/* Vehicle Count Cards */}
         <div className="grid w-full gap-5 mb-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           <DashboardCountCard label="Total Vehicles" count={total} icon={<Car className="text-primary w-6 h-6" />} subtext={""} />
-          <DashboardCountCard label="Available" count={available} icon={<CheckCircle className="text-green-400 w-6 h-6" />} />
-          <DashboardCountCard label="Full" count={full} icon={<XCircle className="text-orange-400 w-6 h-6" />} />
-          <DashboardCountCard label="Unavailable" count={unavailable} icon={<AlertCircle className="text-blue-400 w-6 h-6" />}/>
+          <DashboardCountCard label="Available" count={available} icon={<CheckCircle className="text-green-400 w-6 h-6" />} percent={total > 0 ? Math.round((available / total) * 100) : 0} />
+          <DashboardCountCard label="Full" count={full} icon={<XCircle className="text-orange-400 w-6 h-6" />} percent={total > 0 ? Math.round((full / total) * 100) : 0} />
+          <DashboardCountCard label="Unavailable" count={unavailable} icon={<AlertCircle className="text-blue-400 w-6 h-6" />} percent={total > 0 ? Math.round((unavailable / total) * 100) : 0} />
         </div>
 
         {/* Header with title and count */}
