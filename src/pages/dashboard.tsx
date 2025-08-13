@@ -178,7 +178,6 @@ export default function DashboardPage() {
                 lastCheckInAgo={v.status === 'available' ? 'Available' : v.status === 'full' ? 'Full' : 'Unavailable'}
                 maxLoad={v.seats > 0 ? `${v.seats} seats` : 'No seats'}
                 driver={"-"}
-                onViewDetails={() => {}}
               />
             ))}
           </div>

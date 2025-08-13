@@ -1,6 +1,8 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { useNavigate } from "react-router-dom";
+import { MapPin } from "lucide-react";
 
 export interface DashboardVehicleCardProps {
   img: string;
@@ -13,7 +15,6 @@ export interface DashboardVehicleCardProps {
   lastCheckInAgo: string;
   maxLoad: string;
   driver: string;
-  onViewDetails?: () => void;
   className?: string;
 }
 
@@ -25,18 +26,34 @@ export const DashboardVehicleCard: React.FC<DashboardVehicleCardProps> = ({
   statusColor,
   orderCompleted,
   maxLoad,
-  onViewDetails,
 }) => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate('/dashboard/maps');
+  };
+
   return (
-    <Card>
+    <Card 
+      className="group cursor-pointer transition-all duration-300 relative overflow-hidden  "
+      onClick={handleCardClick}
+    >
       <CardContent className="p-0">
         {/* Vehicle Image */}
         <div className="relative px-4">
           <img 
             src={img} 
             alt="vehicle" 
-            className="object-cover w-full h-42 rounded-lg " 
+            className="object-cover w-full h-42 rounded-lg transition-transform duration-300 group-hover:scale-105" 
           />
+        </div>
+        
+        {/* Glassmorphism Overlay with Location Icon - Covers entire card */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-white/10 to-transparent backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+          <div className="flex flex-col items-center space-y-2">
+            <MapPin className="w-8 h-8 text-white drop-shadow-lg" />
+            <p className="text-white text-sm font-medium drop-shadow-lg">View Location</p>
+          </div>
         </div>
         
         {/* Card Content */}
@@ -70,13 +87,6 @@ export const DashboardVehicleCard: React.FC<DashboardVehicleCardProps> = ({
         
           </div>
 
-          {/* View Details Button */}
-          <button
-            className="bg-primary w-full mt-2 border border-border text-background rounded-lg py-2.5 font-medium text-sm transition-colors cursor-pointer hover:bg-muted-foreground"
-            onClick={onViewDetails}
-          >
-            View details
-          </button>
         </div>
       </CardContent>
     </Card>

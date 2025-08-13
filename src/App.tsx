@@ -10,7 +10,7 @@ import Dashboard from "./pages/dashboard";
 import AddVehicle from "./pages/add-vehicle";
 import VehicleManagement from "./pages/vehicle-management";
 import Settings from "./pages/settings";
-
+import Map from "./pages/map";
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
                     <Route path="add-vehicle" element={<AddVehicle />} />
                     <Route path="vehicle-management" element={<VehicleManagement />} />
                     <Route path="settings" element={<Settings />} />
+                    <Route path="maps" element={<Map />} />
                 </Route>
             </Routes>
         </Router>

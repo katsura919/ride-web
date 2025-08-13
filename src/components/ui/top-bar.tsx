@@ -30,7 +30,7 @@ export const TopBar: React.FC<TopBarProps> = ({
   return (
     <motion.header
       className={cn(
-        "bg-background px-4 py-4",
+        "bg-sidebar px-4 py-4",
         "flex items-center justify-between shadow-sm h-[64px]",
         className
       )}
