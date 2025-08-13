@@ -43,8 +43,8 @@ export default function DashboardPage() {
   });
 
   return (
-    <ScrollArea className="h-screen  w-full">
-      <div className="flex flex-col min-h-screen w-full flex-1 gap-6 px-7 bg-background text-card-foreground p-5">
+    <ScrollArea className="h-screen w-full">
+      <div className="flex flex-col min-h-screen w-full flex-1 gap-6 px-7 bg-background text-card-foreground p-5 mb-10">
 
         {/* Vehicle Count Cards */}
         <div className="grid w-full gap-5 mb-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
@@ -65,8 +65,8 @@ export default function DashboardPage() {
         </div>
 
         {/* Filter Section */}
-        <div className="flex items-center justify-between gap-4  rounded-lg">
-          {/* Left side - Search and Vehicle Type */}
+        <div className="flex items-center justify-between gap-4 rounded-lg">
+          {/* Left side - Search only */}
           <div className="flex items-center gap-4 flex-1">
             {/* Search Vehicle */}
             <div className="relative flex-1 max-w-sm">
@@ -79,8 +79,10 @@ export default function DashboardPage() {
                 className="w-full pl-10 pr-4 py-2 border border-border rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               />
             </div>
+          </div>
 
-            {/* Vehicle Type Dropdown */}
+          {/* Right side - Filter Dropdown and View Toggle */}
+          <div className="flex items-center gap-2">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button className="flex items-center gap-2 px-4 py-2.5 border border-border rounded-lg bg-background text-foreground hover:bg-muted transition-colors">
@@ -96,30 +98,28 @@ export default function DashboardPage() {
                 <DropdownMenuItem onClick={() => setSelectedVehicleType("Unavailable")}>Unavailable</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-          </div>
-
-          {/* Right side - View Toggle */}
-          <div className="flex items-center gap-1 bg-background p-1 rounded-lg border border-border">
-            <button
-              onClick={() => setViewMode("grid")}
-              className={`p-2 rounded-md transition-colors ${
-                viewMode === "grid" 
-                  ? "bg-primary text-primary-foreground shadow-sm" 
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              <Grid3X3 className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => setViewMode("list")}
-              className={`p-2 rounded-md transition-colors ${
-                viewMode === "list" 
-                  ? "bg-primary text-primary-foreground shadow-sm" 
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              <List className="w-4 h-4" />
-            </button>
+            <div className="flex items-center gap-2 bg-background p-1 rounded-lg border border-border">
+              <button
+                onClick={() => setViewMode("grid")}
+                className={`p-2 rounded-md transition-colors ${
+                  viewMode === "grid" 
+                    ? "bg-primary text-primary-foreground shadow-sm" 
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <Grid3X3 className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => setViewMode("list")}
+                className={`p-2 rounded-md transition-colors ${
+                  viewMode === "list" 
+                    ? "bg-primary text-primary-foreground shadow-sm" 
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <List className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
 
@@ -164,7 +164,7 @@ export default function DashboardPage() {
         ) : filteredVehicles.length === 0 ? (
           <div className="flex items-center justify-center h-40 text-muted-foreground text-lg font-medium">No Vehicles</div>
         ) : viewMode === "grid" ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10 mb-10">
             {filteredVehicles.map((v, i) => (
               <DashboardVehicleCard
                 key={i}
@@ -221,12 +221,12 @@ function getVehicleStatusFromData(status: string): string {
 function getStatusColorFromData(status: string): string {
   switch (status) {
     case 'available':
-      return "text-green-600 bg-green-50 border border-green-200";
+      return "text-white bg-green-500";
     case 'full':
-      return "text-orange-600 bg-orange-50 border border-orange-200";
+      return "text-white bg-orange-500";
     case 'unavailable':
-      return "text-blue-600 bg-blue-50 border border-blue-200";
+      return "text-white bg-blue-500";
     default:
-      return "text-gray-600 bg-gray-50 border border-gray-200";
+      return "text-white bg-gray-500";
   }
 }

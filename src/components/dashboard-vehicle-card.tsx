@@ -58,7 +58,7 @@ export const DashboardVehicleCard: React.FC<DashboardVehicleCardProps> = ({
           {/* Details Grid */}
           <div className="">
             <div className="flex justify-between items-center text-sm">
-              <span className="text-muted-foreground">Order completed</span>
+              <span className="text-muted-foreground">Available Seat</span>
               <span className="font-medium text-foreground">{orderCompleted}</span>
             </div>
             
