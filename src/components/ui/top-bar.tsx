@@ -46,7 +46,7 @@ export const TopBar: React.FC<TopBarProps> = ({
           onClick={toggleSidebar}
           className={cn(
             "p-2 rounded-lg transition-colors cursor-pointer",
-            "text-primary hover:text-gray-900 lg:hidden xl:flex"
+            "text-primary hover:text-gray-900  xl:flex"
           )}
           variant="ghost"
           size="icon"

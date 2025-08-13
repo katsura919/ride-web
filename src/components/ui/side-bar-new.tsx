@@ -120,8 +120,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ children, className }) => {
                 ease: [0.4, 0, 0.2, 1],
               }}
               className={cn(
-                "fixed top-0 left-0 h-full w-80 bg-white z-50 md:hidden",
-                "shadow-xl border-r border-gray-200",
+                "fixed top-0 left-0 h-full w-80 bg-sidebar z-50 md:hidden",
                 className
               )}
             >
@@ -161,9 +160,8 @@ export const SidebarHeader: React.FC<SidebarHeaderProps> = ({
         <motion.button
           onClick={toggleSidebar}
           className={cn(
-            "absolute top-3 right-3 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200",
-            "flex items-center justify-center transition-colors",
-            "text-gray-600 hover:text-gray-900 shadow-sm border border-gray-200"
+            "absolute top-3 right-3 w-8 h-8 rounded-full bg-sidebar hover:bg-gray-200",
+            "flex items-center justify-center transition-colors"
           )}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -176,7 +174,7 @@ export const SidebarHeader: React.FC<SidebarHeaderProps> = ({
             damping: 17,
           }}
         >
-          <X className="w-4 h-4" />
+          <X className="w-5 h-5" />
         </motion.button>
       )}
     </div>
@@ -277,7 +275,7 @@ export const SidebarNavItem: React.FC<SidebarNavItemProps> = ({
       to={link.href}
       onClick={handleClick}
       className={cn(
-        "flex items-center px-3 py-2.5 rounded-lg text-sm font-medium relative ",
+        "flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium relative ",
         "transition-all duration-200 group",
         "hover:bg-sidebar-accent focus:outline-none",
         link.isActive

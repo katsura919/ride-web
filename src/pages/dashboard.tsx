@@ -76,7 +76,7 @@ export default function DashboardPage() {
                 placeholder="Search"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-border rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="bg-card w-full pl-10 pr-4 py-2 border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               />
             </div>
           </div>
@@ -85,7 +85,7 @@ export default function DashboardPage() {
           <div className="flex items-center gap-2">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-2 px-4 py-2.5 border border-border rounded-lg bg-background text-foreground hover:bg-muted transition-colors">
+                <button className="flex items-center gap-2 px-4 py-2.5 border border-border rounded-lg bg-card text-foreground hover:bg-muted transition-colors">
                   <ListFilter className="w-4 h-4 text-muted-foreground" />
                   <span className="text-sm font-medium">{selectedVehicleType}</span>
                   <ChevronDown className="w-4 h-4 text-muted-foreground" />
@@ -98,7 +98,7 @@ export default function DashboardPage() {
                 <DropdownMenuItem onClick={() => setSelectedVehicleType("Unavailable")}>Unavailable</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <div className="flex items-center gap-2 bg-background p-1 rounded-lg border border-border">
+            <div className="flex items-center gap-2 bg-card p-1 rounded-lg border border-border">
               <button
                 onClick={() => setViewMode("grid")}
                 className={`p-2 rounded-md transition-colors ${
@@ -125,8 +125,8 @@ export default function DashboardPage() {
 
         {/* Vehicle Display */}
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {Array.from({ length: 5 }).map((_, i) => (
+           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6 gap-4 md:gap-6 2xl:gap-5 xl:gap-8 mb-10">
+            {Array.from({ length: 6 }).map((_, i) => (
               <Card key={i} className="rounded-xl shadow-sm border border-border overflow-hidden hover:shadow-md transition-shadow">
                 <CardContent className="p-0">
                   <div className="relative px-4">
@@ -164,7 +164,7 @@ export default function DashboardPage() {
         ) : filteredVehicles.length === 0 ? (
           <div className="flex items-center justify-center h-40 text-muted-foreground text-lg font-medium">No Vehicles</div>
         ) : viewMode === "grid" ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10 mb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6 gap-4 md:gap-6 2xl:gap-5 xl:gap-8 mb-10">
             {filteredVehicles.map((v, i) => (
               <DashboardVehicleCard
                 key={i}
@@ -225,7 +225,7 @@ function getStatusColorFromData(status: string): string {
     case 'full':
       return "text-white bg-orange-500";
     case 'unavailable':
-      return "text-white bg-blue-500";
+      return "text-white bg-gray-500";
     default:
       return "text-white bg-gray-500";
   }

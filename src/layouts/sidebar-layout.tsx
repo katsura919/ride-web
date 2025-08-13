@@ -13,7 +13,7 @@ import {
 import { TopBar } from "../components/ui/top-bar";
 import { motion, AnimatePresence } from "motion/react";
 import { 
-  LayoutDashboard, 
+  Layers, 
   Plus, 
   Car, 
   Settings,
@@ -56,7 +56,7 @@ const useNavigationLinks = () => {
       {
         label: "Dashboard",
         href: "/dashboard",
-        icon: <LayoutDashboard className="w-5 h-5 text-sidebar-foreground" />,
+        icon: <Layers className="w-5 h-5 text-sidebar-foreground" />,
         isActive: location.pathname === "/dashboard",
       },
       {
