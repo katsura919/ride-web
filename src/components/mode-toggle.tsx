@@ -23,7 +23,7 @@ export function ModeToggle() {
   return (
     <Button
        className={cn(
-                  "relative p-2 rounded-lg transition-colors cursor-pointer"
+                  "relative p-2 rounded-lg cursor-pointer"
                 )}
       variant="ghost"
       size="icon"
@@ -31,9 +31,9 @@ export function ModeToggle() {
       aria-label="Toggle theme"
     >
       {isDark ? (
-        <Sun className="h-5 w-5 transition-all text-foreground" />
+        <Sun className="h-5 w-5 text-foreground" />
       ) : (
-        <Moon className="h-5 w-5 transition-all text-foreground" />
+        <Moon className="h-5 w-5  text-foreground" />
       )}
     </Button>
   );

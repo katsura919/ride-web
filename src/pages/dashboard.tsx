@@ -49,9 +49,9 @@ export default function DashboardPage() {
         {/* Vehicle Count Cards */}
         <div className="grid w-full gap-5 mb-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           <DashboardCountCard label="Total Vehicles" count={total} icon={<Car className="text-primary w-6 h-6" />} subtext={""} />
-          <DashboardCountCard label="Available" count={available} icon={<CheckCircle className="text-green-400 w-6 h-6" />} percent={total > 0 ? Math.round((available / total) * 100) : 0} />
-          <DashboardCountCard label="Full" count={full} icon={<XCircle className="text-orange-400 w-6 h-6" />} percent={total > 0 ? Math.round((full / total) * 100) : 0} />
-          <DashboardCountCard label="Unavailable" count={unavailable} icon={<AlertCircle className="text-blue-400 w-6 h-6" />} percent={total > 0 ? Math.round((unavailable / total) * 100) : 0} />
+          <DashboardCountCard label="Available" count={available} icon={<CheckCircle className="text-primary w-6 h-6" />} percent={total > 0 ? Math.round((available / total) * 100) : 0} />
+          <DashboardCountCard label="Full" count={full} icon={<XCircle className="text-primary w-6 h-6" />} percent={total > 0 ? Math.round((full / total) * 100) : 0} />
+          <DashboardCountCard label="Unavailable" count={unavailable} icon={<AlertCircle className="text-primary w-6 h-6" />} percent={total > 0 ? Math.round((unavailable / total) * 100) : 0} />
         </div>
 
         {/* Header with title and count */}
@@ -85,7 +85,7 @@ export default function DashboardPage() {
           <div className="flex items-center gap-2">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-2 px-4 py-2.5 border border-border rounded-lg bg-card text-foreground hover:bg-muted transition-colors">
+                <button className="flex items-center gap-2 px-4 py-2.5 border border-border rounded-lg bg-card text-foreground hover:bg-muted">
                   <ListFilter className="w-4 h-4 text-muted-foreground" />
                   <span className="text-sm font-medium">{selectedVehicleType}</span>
                   <ChevronDown className="w-4 h-4 text-muted-foreground" />
@@ -101,7 +101,7 @@ export default function DashboardPage() {
             <div className="flex items-center gap-2 bg-card p-1 rounded-lg border border-border">
               <button
                 onClick={() => setViewMode("grid")}
-                className={`p-2 rounded-md transition-colors ${
+                className={`p-2 rounded-md ${
                   viewMode === "grid" 
                     ? "bg-primary text-primary-foreground shadow-sm" 
                     : "text-muted-foreground hover:text-foreground"
@@ -111,7 +111,7 @@ export default function DashboardPage() {
               </button>
               <button
                 onClick={() => setViewMode("list")}
-                className={`p-2 rounded-md transition-colors ${
+                className={`p-2 rounded-md ${
                   viewMode === "list" 
                     ? "bg-primary text-primary-foreground shadow-sm" 
                     : "text-muted-foreground hover:text-foreground"

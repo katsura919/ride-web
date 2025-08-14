@@ -35,7 +35,7 @@ export const DashboardVehicleCard: React.FC<DashboardVehicleCardProps> = ({
 
   return (
     <Card 
-      className="group cursor-pointer transition-all duration-300 relative overflow-hidden  "
+      className="bg-card group cursor-pointer relative overflow-hidden  "
       onClick={handleCardClick}
     >
       <CardContent className="p-0">
