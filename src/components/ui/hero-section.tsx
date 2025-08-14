@@ -402,7 +402,7 @@ export default function HeroSection() {
         >
           <div className="mt-2 mb-8 w-full">
             <div className="font-bold text-neutral-700 dark:text-neutral-400
-              text-3xl sm:text-10xl md:text-6xl lg:text-7xl
+              text-5xl sm:text-10xl md:text-6xl lg:text-7xl
               leading-tight sm:leading-tight md:leading-tight lg:leading-tight
               break-words w-full ">
               Move <FlipWords words={["smarter", "safer", "easier", "together",]} /> <br />
@@ -410,10 +410,10 @@ export default function HeroSection() {
             </div>
           </div>
     <div className="flex flex-row gap-4 w-full sm:w-auto justify-center lg:justify-start">
-            <button className="bg-blue-600 text-white px-4 py-2 sm:px-8 sm:py-4 rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-sm w-auto text-sm sm:text-base">
+            <button className="bg-white text-black px-4 py-2 sm:px-8 sm:py-4 rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-sm w-auto text-sm sm:text-base">
               Start Tracking
             </button>
-            <button className="border border-gray-300 text-gray-700 px-4 py-2 sm:px-8 sm:py-4 rounded-lg font-medium hover:bg-gray-50 transition-colors w-auto text-sm sm:text-base">
+            <button className="border border-gray-300 text-white px-4 py-2 sm:px-8 sm:py-4 rounded-lg font-medium w-auto text-sm sm:text-base">
               Watch Demo
             </button>
           </div>
@@ -427,7 +427,7 @@ export default function HeroSection() {
           className="relative flex justify-center lg:justify-end w-full"
         >
           {/* Globe Visualization */}
-          <div className="w-full h-[380px] sm:h-[300px] md:h-[400px] lg:h-[600px] max-w-xs sm:max-w-md md:max-w-lg mx-auto lg:mx-0">
+          <div className="w-full h-[380px] sm:h-[300px] md:h-[400px] lg:h-[650px] max-w-xs sm:max-w-md md:max-w-lg mx-auto lg:mx-0">
             <World data={sampleArcs} globeConfig={globeConfig} />
           </div>
         </motion.div>
