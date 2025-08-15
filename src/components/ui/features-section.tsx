@@ -35,7 +35,7 @@ export default function FeaturesSection() {
   return (
     <section className="w-full py-20 px-4" id="features">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

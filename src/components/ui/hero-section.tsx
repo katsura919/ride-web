@@ -390,7 +390,7 @@ export default function HeroSection() {
     },
   ];
   return (
-    <section className="h-[100vh] mt-20 mb-10 w-full py-16 px-4 sm:py-20 sm:px-6 relative  "id="hero">
+    <section className="h-[70vh] mt-20  w-full py-16 px-4 sm:py-20 sm:px-6 relative  "id="hero">
 
       <div className="h-100 max-w-7xl mx-auto ">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center overflow-visible">
