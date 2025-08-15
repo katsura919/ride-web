@@ -40,7 +40,7 @@ export default function FeaturesSectionDemo() {
     },
   ];
   return (
-    <div className="w-full border-t relative min-h-screen">
+    <div className="relative z-20 w-full border-t min-h-screen">
       {/* Subtle dark gradient background, mostly dark with a hint of white at the top */}
       <div
         className="absolute inset-0 z-0 "
