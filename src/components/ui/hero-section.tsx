@@ -390,9 +390,10 @@ export default function HeroSection() {
     },
   ];
   return (
-  <section className="w-full py-16 px-4 sm:py-20 sm:px-6" id="hero">
-    <div className="max-w-7xl mx-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+    <section className="h-[100vh] mt-20 w-full py-16 px-4 sm:py-20 sm:px-6 relative " id="hero">
+
+      <div className="h-100 max-w-7xl mx-auto ">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center overflow-visible">
         {/* Left Content */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -400,20 +401,25 @@ export default function HeroSection() {
           transition={{ duration: 0.8 }}
           className="text-center lg:text-left flex flex-col items-center lg:items-start"
         >
+          
           <div className="mt-2 mb-8 w-full">
-            <div className="font-bold text-neutral-700 dark:text-neutral-400
+            <div className="font-bold text-whit
               text-5xl sm:text-10xl md:text-6xl lg:text-7xl
               leading-tight sm:leading-tight md:leading-tight lg:leading-tight
               break-words w-full ">
-              Move <FlipWords words={["smarter", "safer", "easier", "together",]} /> <br />
+              Move <span className="inline-block bg-neutral-800 bg-opacity-80 rounded-lg px-4 py-1 text-white shadow-md align-middle border"><FlipWords words={["smarter", "safer", "easier", "together",]} /></span> <br />
               with Ride Alert!
+            </div>
+            <div className="mt-4 text-neutral-600 dark:text-neutral-400 text-lg sm:text-2xl font-normal w-full">
+              Track vehicles in real time and get instant alerts.
+              Manage trips and safety—all in one platform.
             </div>
           </div>
     <div className="flex flex-row gap-4 w-full sm:w-auto justify-center lg:justify-start">
-            <button className="bg-white text-black px-4 py-2 sm:px-8 sm:py-4 rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-sm w-auto text-sm sm:text-base">
+            <button className="bg-white text-black px-4 py-2 sm:px-8 sm:py-4 rounded-xl font-mediumshadow-sm w-auto text-sm sm:text-base cursor-pointer">
               Start Tracking
             </button>
-            <button className="border border-gray-300 text-white px-4 py-2 sm:px-8 sm:py-4 rounded-lg font-medium w-auto text-sm sm:text-base">
+            <button className="border border-gray-300 text-white px-4 py-2 sm:px-8 sm:py-4 rounded-xl font-medium w-auto text-sm sm:text-base cursor-pointer">
               Watch Demo
             </button>
           </div>
@@ -424,10 +430,10 @@ export default function HeroSection() {
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative flex justify-center lg:justify-end w-full"
+          className="relative flex justify-center  w-full overflow-visible"
         >
           {/* Globe Visualization */}
-          <div className="w-full h-[380px] sm:h-[300px] md:h-[400px] lg:h-[650px] max-w-xs sm:max-w-md md:max-w-lg mx-auto lg:mx-0">
+          <div className="w-full h-[380px] sm:h-[300px] md:h-[400px] lg:h-[600px] overflow-visible">
             <World data={sampleArcs} globeConfig={globeConfig} />
           </div>
         </motion.div>

@@ -7,27 +7,37 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "./dropdown-menu";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 0);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="w-full h-15 max-h-15 px-4 lg:px-6 py-0 fixed top-0 left-0 z-50 bg-black bg-opacity-90 backdrop-blur-md shadow-md border-b">
-      <div className="flex items-center max-w-7xl mx-auto h-full min-h-0">
+    <nav className={`w-full h-15 max-h-15 px-4 lg:px-6 py-0 fixed top-0 left-0 z-50 bg-black bg-opacity-90 backdrop-blur-md shadow-md${scrolled ? ' border-b' : ''}`}> 
+  <div className="flex items-center max-w-7xl mx-auto h-full min-h-0">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group h-full">
-          <div className="w-7 h-7 sm:w-8 sm:h-8 bg-blue-600 rounded-lg flex items-center justify-center group-hover:bg-blue-700 transition-colors">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 bg-blue-600 rounded-lg flex items-center justify-center ">
             <Car className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
           </div>
-          <span className="hidden sm:inline font-bold text-base sm:text-lg md:text-xl text-white group-hover:text-blue-700 transition-colors leading-none">Ride Alert</span>
+          <span className="hidden sm:inline font-bold text-base sm:text-lg md:text-xl text-white leading-none">Ride Alert</span>
         </Link>
         {/* Navigation Links */}
-  <div className="hidden md:flex items-center gap-6 ml-6 h-full">
+        <div className="hidden md:flex items-center gap-7 ml-10 h-full">
           {["Features", "Trips", "Showcase"].map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
-              className="text-gray-400 hover:text-gray-900 transition-colors text-sm font-medium"
+              className="text-gray-300 text-md font-medium hover:text-white"
             >
               {item}
             </a>
@@ -35,10 +45,10 @@ export default function NavBar() {
         </div>
         {/* Desktop: Sign In and Download App Buttons */}
   <div className="hidden md:flex items-center gap-2 ml-auto h-full">
-          <Link to="/login" className="text-white hover:text-gray-900 transition-colors text-sm font-medium cursor-pointer">
+          <Link to="/login" className="text-gray-300 text-md font-medium hover:text-white cursor-pointer mr-2">
             Sign In
           </Link>
-          <button className="bg-blue-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm">
+          <button className="bg-blue-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm cursor-pointer">
             Download App
           </button>
         </div>
@@ -53,7 +63,7 @@ export default function NavBar() {
                 {menuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56 bg-black text-white border border-gray-800">
+            <DropdownMenuContent className="w-56 mr-5 bg-black text-white border">
               <div className="flex flex-col gap-2 py-2">
                 {["Features", "Trips", "Showcase"].map((item) => (
                   <DropdownMenuItem

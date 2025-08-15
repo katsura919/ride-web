@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
-    <footer className="w-full py-16 px-4 bg-gray-900 relative">
+    <footer className="w-full border pt-20 bg-black relative">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
@@ -77,7 +77,7 @@ export default function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
-          className="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center"
+          className="mb-10 pt-8 flex flex-col md:flex-row justify-between items-center"
         >
           <p className="text-gray-400 text-sm">
             © {new Date().getFullYear()} Ride Alert. All rights reserved.
