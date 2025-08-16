@@ -2,7 +2,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { vehicles } from "../data/vehicle-data";
 import { DashboardCountCard } from "@/components/dashboard-count-card";
-import { Car, CheckCircle, XCircle, AlertCircle, Search, Grid3X3, List, ChevronDown, ListFilter } from "lucide-react";
+import { Car, CheckCircle, XCircle, AlertCircle, Search, ChevronDown, ListFilter } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -10,7 +10,6 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { DashboardVehicleCard } from "@/components/dashboard-vehicle-card";
-import { VehicleListView } from "@/components/vehicle-list-view";
 import { useState, useEffect } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent } from "@/components/ui/card";
@@ -18,7 +17,6 @@ import { Card, CardContent } from "@/components/ui/card";
 export default function DashboardPage() {
   const [searchValue, setSearchValue] = useState("");
   const [selectedVehicleType, setSelectedVehicleType] = useState("Any");
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [loading, setLoading] = useState(true);
 
   // Simulate loading for demo (replace with real loading logic as needed)
@@ -98,28 +96,6 @@ export default function DashboardPage() {
                 <DropdownMenuItem onClick={() => setSelectedVehicleType("Unavailable")}>Unavailable</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <div className="flex items-center gap-2 bg-card p-1 rounded-lg border border-border">
-              <button
-                onClick={() => setViewMode("grid")}
-                className={`p-2 rounded-md ${
-                  viewMode === "grid" 
-                    ? "bg-primary text-primary-foreground shadow-sm" 
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                <Grid3X3 className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => setViewMode("list")}
-                className={`p-2 rounded-md ${
-                  viewMode === "list" 
-                    ? "bg-primary text-primary-foreground shadow-sm" 
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                <List className="w-4 h-4" />
-              </button>
-            </div>
           </div>
         </div>
 
@@ -161,7 +137,7 @@ export default function DashboardPage() {
           </div>
         ) : filteredVehicles.length === 0 ? (
           <div className="flex items-center justify-center h-40 text-muted-foreground text-lg font-medium">No Vehicles</div>
-        ) : viewMode === "grid" ? (
+        ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6 gap-4 md:gap-6 2xl:gap-5 xl:gap-8 mb-10">
             {filteredVehicles.map((v, i) => (
               <DashboardVehicleCard
@@ -179,22 +155,6 @@ export default function DashboardPage() {
               />
             ))}
           </div>
-        ) : (
-          <VehicleListView
-            vehicles={filteredVehicles.map((v) => ({
-              img: v.img,
-              title: v.route,
-              subtitle: `ETA: ${v.eta}`,
-              status: getVehicleStatusFromData(v.status),
-              statusColor: getStatusColorFromData(v.status),
-              orderCompleted: v.seats,
-              lastCheckIn: v.eta,
-              lastCheckInAgo: v.status === 'available' ? 'Available' : v.status === 'full' ? 'Full' : 'Unavailable',
-              maxLoad: v.seats > 0 ? `${v.seats} seats` : 'No seats',
-              driver: "-",
-              onViewDetails: () => {},
-            }))}
-          />
         )}
       </div>
     </ScrollArea>
