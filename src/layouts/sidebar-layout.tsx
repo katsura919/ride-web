@@ -72,13 +72,6 @@ const useNavigationLinks = () => {
         isActive: location.pathname === "/dashboard/vehicle-management",
         badge: "12",
       },
-      {
-        label: "Maps",
-        href: "/dashboard/maps",
-        icon: <Car className="w-5 h-5 text-sidebar-foreground" />,
-        isActive: location.pathname === "/dashboard/maps",
-        badge: "12",
-      },
     ];
 
     const settingsNavLinks = [

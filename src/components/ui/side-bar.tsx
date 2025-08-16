@@ -87,7 +87,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ children, className }) => {
           ease: [0.4, 0, 0.2, 1],
         }}
         className={cn(
-          "hidden md:flex h-full bg-sidebar flex-col relative z-10",
+          "hidden md:flex h-full bg-sidebar flex-col relative z-10 border-r",
           "overflow-hidden",
           className
         )}

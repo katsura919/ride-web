@@ -2,7 +2,6 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 import { Menu, 
-         Bell,
          ChevronsUpDown 
 } from "lucide-react";
 import { useSidebarContext } from "./side-bar";
@@ -15,6 +14,8 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import NotifDropdown from "../notif-dialog";
+import { useNavigate } from "react-router-dom";
 
 interface TopBarProps {
   className?: string;
@@ -26,11 +27,15 @@ export const TopBar: React.FC<TopBarProps> = ({
   title = "Dashboard"
 }) => {
   const { toggleSidebar } = useSidebarContext();
+  const navigate = useNavigate();
 
+  const signOut = () => {
+    navigate("/");
+  };
   return (
     <motion.header
       className={cn(
-        "bg-sidebar px-4 py-4",
+        "bg-sidebar px-4 py-4 border-b",
         "flex items-center justify-between shadow-sm h-[64px]",
         className
       )}
@@ -62,29 +67,18 @@ export const TopBar: React.FC<TopBarProps> = ({
       {/* Right side - User profile and notifications */}
       <div className="flex items-center space-x-3">
         {/* Notifications */}
-        <Button
-          className={cn(
-            "relative p-2 rounded-lg transition-colors cursor-pointer"
-          )}
-          variant="ghost"
-          size="icon"
-        >
-          <Bell className="w-5 h-5 text-primary" strokeWidth={2} />
-          {/* Notification badge */}
-          <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-        </Button>
-
+        <NotifDropdown />
         {/* Mode Toggle */}
         <ModeToggle />
 
         {/* User Profile */}
-        <UserProfileDropdown />
+        <UserProfileDropdown signOut={signOut} />
       </div>
     </motion.header>
   );
 };
 
-const UserProfileDropdown: React.FC = () => {
+const UserProfileDropdown: React.FC<{ signOut: () => void }> = ({ signOut }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -106,7 +100,7 @@ const UserProfileDropdown: React.FC = () => {
         <DropdownMenuItem>View Profile</DropdownMenuItem>
         <DropdownMenuItem>Settings</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Sign Out</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => signOut() }>Sign Out</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
