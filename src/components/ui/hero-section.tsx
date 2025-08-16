@@ -28,7 +28,7 @@ export default function HeroSection() {
               transition={{ duration: 0.8 }}
               className="px-10 text-center lg:text-left flex flex-col items-center lg:items-start"
             >
-              <div className="mt-2  w-full">
+              <div className="mt-2 mb-6 w-full">
                 <div className="font-bold text-whit
                   text-5xl sm:text-10xl md:text-6xl lg:text-1xl
                   leading-tight sm:leading-tight md:leading-tight lg:leading-tight
